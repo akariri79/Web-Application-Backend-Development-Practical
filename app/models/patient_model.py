@@ -1,7 +1,7 @@
 from app.extensions import db
 
 
-# Create Tables
+# Create Patient Table
 class Patient(db.Model):
     __tablename__ = "patients"
     patient_id = db.Column(db.String(20), primary_key=True)
