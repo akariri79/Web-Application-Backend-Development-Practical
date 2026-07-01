@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}
+General Assessment
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-header bg-primary text-white">
+
+                <h4 class="mb-0">
+                    General Health Assessment
+                </h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+
+                        Patient:
+                        {{ vitals.patient.first_name }} {{ vitals.patient.last_name }}
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">Visit Date</label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    value="{{ today }}"
+                                    readonly
+                                >
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        {{ form.general_health.label(class="form-label d-block") }}
+
+                        {% for option in form.general_health %}
+
+                            <div class="form-check form-check-inline">
+
+                                {{ option(class="form-check-input") }}
+                                {{ option.label(class="form-check-label") }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        {{ form.drug_usage.label(class="form-label d-block") }}
+
+                        {% for option in form.drug_usage %}
+
+                            <div class="form-check form-check-inline">
+
+                                {{ option(class="form-check-input") }}
+                                {{ option.label(class="form-check-label") }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        {{ form.comments.label(class="form-label") }}
+                        {{ form.comments(class="form-control", rows="4") }}
+
+                    </div>
+
+                    <div class="text-end">
+
+                        {{ form.submit(class="btn btn-primary") }}
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

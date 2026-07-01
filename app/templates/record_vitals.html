@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}
+Record Patient Vitals
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-header bg-primary text-white">
+
+                <h4 class="mb-0">
+                    Record Patient Vitals
+                </h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+
+                    {{ form.hidden_tag() }}
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <h4>
+                                    {{ patient.first_name }} {{ patient.last_name }}
+                            </h4>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">Visit Date</label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    value="{{ today }}"
+                                    readonly
+                                >
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            {{ form.height_cm.label(class="form-label") }}
+
+                            {{ form.height_cm(class="form-control") }}
+
+                            {% for error in form.height_cm.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            {{ form.weight_kg.label(class="form-label") }}
+
+                            {{ form.weight_kg(class="form-control") }}
+
+                            {% for error in form.weight_kg.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+
+                        {{ form.submit(class="btn btn-primary") }}
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

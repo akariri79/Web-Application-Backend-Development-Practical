@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register Patient
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-header bg-primary text-white">
+
+                <h4 class="mb-0">
+                    Register New Patient
+                </h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+
+                    {{ form.hidden_tag() }}
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            {{ form.first_name.label(class="form-label") }}
+
+                            {{ form.first_name(class="form-control") }}
+
+                            {% for error in form.first_name.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            {{ form.last_name.label(class="form-label") }}
+
+                            {{ form.last_name(class="form-control") }}
+
+                            {% for error in form.last_name.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            {{ form.gender.label(class="form-label d-block") }}
+
+                            {% for option in form.gender %}
+                                <div class="form-check form-check-inline">
+
+                                    {{ option(class="form-check-input") }}
+
+                                    {{ option.label(class="form-check-label") }}
+
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            {{ form.date_of_birth.label(class="form-label") }}
+
+                            {{ form.date_of_birth(class="form-control") }}
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-4">
+
+                            {{ form.patient_id.label(class="form-label") }}
+
+                            {{ form.patient_id(class="form-control") }}
+
+                            {% for error in form.patient_id.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+
+                            {{ form.registration_date.label(class="form-label") }}
+
+                            {{ form.registration_date(class="form-control") }}
+
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ url_for('home') }}" class="btn btn-secondary me-2">
+                            Cancel
+                        </a>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

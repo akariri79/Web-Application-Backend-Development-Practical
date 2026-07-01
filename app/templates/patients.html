@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}
+Patient Report
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Patient Report</h2>
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header">
+
+        Filter Report
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="GET">
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        Visit Date
+
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        name="visit_date"
+                        value="{{ selected_date or '' }}">
+
+                </div>
+
+                <div class="col-md-4 d-flex align-items-end">
+
+                    <button
+                        class="btn btn-primary me-2"
+                        type="submit">
+
+                        Filter
+
+                    </button>
+
+                    <a
+                        href="{{ url_for('patients') }}"
+                        class="btn btn-secondary">
+
+                        Clear
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<p>
+
+    Showing
+
+    <strong>{{ record_count }}</strong>
+
+    patient(s)
+
+</p>
+
+<div class="table-responsive">
+
+<table class="table table-striped table-hover">
+
+    <thead class="table-primary">
+
+        <tr>
+
+            <th>Patient Name</th>
+
+            <th>Age</th>
+
+            <th>BMI Status</th>
+
+            <th>Visit Date</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for patient in patient_records %}
+
+        <tr>
+
+            <td>
+
+                {{ patient.first_name }}
+
+                {{ patient.last_name }}
+
+            </td>
+
+            <td>
+
+                {{ patient.age }}
+
+            </td>
+
+            <td>
+
+                {% if patient.bmi_status == "Normal" %}
+
+                    <span class="badge bg-success">
+
+                        {{ patient.bmi_status }}
+
+                    </span>
+
+                {% elif patient.bmi_status == "Underweight" %}
+
+                    <span class="badge bg-warning text-dark">
+
+                        {{ patient.bmi_status }}
+
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-danger">
+
+                        {{ patient.bmi_status }}
+
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {{ patient.visit_date.strftime("%d/%m/%Y") }}
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
